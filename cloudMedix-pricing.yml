@@ -1,0 +1,179 @@
+saasName: Cloud Medix
+version: "2.0"
+createdAt: "2024-11-17"
+currency: €
+hasAnnualPayment: false
+features:
+  clinics:
+    type: DOMAIN
+    valueType: BOOLEAN
+    defaultValue: true
+    description: Number of clinics allowed
+  doctorsPerClinic:
+    type: DOMAIN
+    valueType: BOOLEAN
+    defaultValue: true
+    description: Number of doctors per clinic
+  patientsPerClinic:
+    type: DOMAIN
+    valueType: BOOLEAN
+    defaultValue: true
+    description: Number patients allowed per clinic
+  clinicalHistoryFormat:
+    type: DOMAIN
+    valueType: TEXT
+    defaultValue: PDF
+    description: Clinical history format type
+  maxFileSize:
+    type: DOMAIN
+    valueType: NUMERIC
+    defaultValue: 20
+    description: Maximum file upload size
+usageLimits:
+  maxClinics:
+    description: ''
+    valueType: NUMERIC
+    defaultValue: 1
+    unit: clinic
+    type: RENEWABLE
+    linkedFeatures:
+    - clinics
+  maxMaxFileSize:
+    description: ''
+    valueType: NUMERIC
+    defaultValue: 0.5
+    unit: GB
+    type: RENEWABLE
+    linkedFeatures:
+    - maxFileSize
+  maxDoctorsPerClinic:
+    description: ''
+    valueType: NUMERIC
+    defaultValue: 2
+    unit: doctor
+    type: RENEWABLE
+    linkedFeatures:
+    - doctorsPerClinic
+  maxPatientsPerClinic:
+    description: ''
+    valueType: NUMERIC
+    defaultValue: 350
+    unit: patient
+    type: RENEWABLE
+    linkedFeatures:
+    - patientsPerClinic
+plans:
+  BASIC:
+    description: Basic plan
+    price: 0.0
+    unit: user/month
+    features:
+      clinics:
+        value: true
+      doctorsPerClinic:
+        value: true
+      patientsPerClinic:
+        value: true
+      clinicalHistoryFormat:
+        value: PDF
+      maxFileSize:
+        value: 20
+    usageLimits:
+      maxClinics:
+        value: 1
+  ADVANCED:
+    description: Advanced plan
+    price: 5.0
+    unit: user/month
+    features:
+      clinics:
+        value: true
+      doctorsPerClinic:
+        value: true
+      patientsPerClinic:
+        value: true
+      clinicalHistoryFormat:
+        value: CSV, XML, JSON
+      maxFileSize:
+        value: 20
+    usageLimits:
+      maxClinics:
+        value: 3
+      maxDoctorsPerClinic:
+        value: 15
+      maxPatientsPerClinic:
+        value: 1000
+      maxMaxFileSize:
+        value: 1
+  PROFESSIONAL:
+    description: Pro plan
+    price: 10.0
+    unit: user/month
+    features:
+      clinics:
+        value: true
+      doctorsPerClinic:
+        value: true
+      patientsPerClinic:
+        value: true
+      clinicalHistoryFormat:
+        value: DICOM, HL7, FHIR
+      maxFileSize:
+        value: 10
+    usageLimits:
+      maxClinics:
+        value: 6
+      maxDoctorsPerClinic:
+        value: 35
+      maxPatientsPerClinic:
+        value: 5000
+      maxMaxFileSize:
+        value: 10
+  ENTERPRISE:
+    description: Enterprise plan
+    price: X
+    unit: user/month
+    features: 
+      clinics:
+        value: true
+      doctorsPerClinic:
+        value: true
+      patientsPerClinic:
+        value: true
+      clinicalHistoryFormat:
+        value: true
+      maxFileSize:
+        value: true
+    usageLimits: 
+      maxClinics:
+        value: true
+      maxDoctorsPerClinic:
+        value: true
+      maxPatientsPerClinic:
+        value: true
+      maxMaxFileSize:
+        value: true
+addOns:
+  moreDoctorsAndPatients:
+    description: Add-On to buy more doctors and patients
+    availableFor:
+      - BASIC
+    price: 9.99
+    unit: user/month
+    features:
+      doctorsPerClinic:
+        value: true
+      patientsPerClinic:
+        value: true
+    usageLimit:
+      maxDoctorsPerClinic:
+        value: 1
+      maxPatientsPerClinic:
+        value: 100
+  patientsReminder:
+    description: Add-On to enable patient appointments reminder
+    availableFor:
+      - PROFESSIONAL
+    price: 29.99
+    unit: user/month
+    features: null
