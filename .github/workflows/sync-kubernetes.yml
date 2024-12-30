@@ -1,0 +1,25 @@
+name: Sync Kubernetes Specs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-specs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync OpenAPI Specs 🔄
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        timeout-minutes: 2
+        run: |
+          mkdir -p kubernetes
+          ./sync-kubernetes.sh $GITHUB_TOKEN
+
+      - name: Commit and push changes 📤
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: sync kubernetes specs🔄" && git push)
