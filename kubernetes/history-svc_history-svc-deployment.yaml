@@ -60,7 +60,30 @@ spec:
                   name: history-secrets
                   key: MONGOURL
             - name: NODE_ENV
-              value: production
+              valueFrom:
+                secretKeyRef:
+                  name: history-secrets
+                  key: NODE_ENV
+            - name: PATIENT_SVC
+              valueFrom:
+                secretKeyRef:
+                  name: history-secrets
+                  key: PATIENT_SVC
+            - name: APPOINTMENT_SVC
+              valueFrom:
+                secretKeyRef:
+                  name: history-secrets
+                  key: APPOINTMENT_SVC
+            - name: DRAGONFLY_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: history-secrets
+                  key: DRAGONFLY_HOST
+            - name: DRAGONFLY_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: history-secrets
+                  key: DRAGONFLY_PORT
           image: ghcr.io/fis2425/history-svc:latest
           name: history-svc
           ports:
