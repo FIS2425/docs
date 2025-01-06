@@ -8,11 +8,10 @@ metadata:
     io.kompose.service: history-svc
   name: history-svc
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 3005
       targetPort: 3005
-      nodePort: 30005
   selector:
     io.kompose.service: history-svc
